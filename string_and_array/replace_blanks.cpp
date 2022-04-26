@@ -14,7 +14,8 @@ using namespace std;
 
 // TODO: 見つけた時にすぐに挿入したい
 
-string space_replace(string arg){
+string space_replace(string arg, int string_length){
+    // string_lengthはspaceを除いた文字列の長さ
     int len = arg.length();
     vector<int> indexes(len);
     int space_index =  0;
@@ -36,6 +37,6 @@ string space_replace(string arg){
     return return_str;
 }
 int main(){
-    cout << space_replace("hoge huga piyo") << endl;
+    cout << space_replace("hoge huga piyo", 12) << endl;
     return 0;
 }
