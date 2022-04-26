@@ -12,7 +12,6 @@
  */
 using namespace std;
 
-// TODO: intert位置は二分法で見つけたい
 // TODO: 見つけた時にすぐに挿入したい
 
 string space_replace(string arg){
