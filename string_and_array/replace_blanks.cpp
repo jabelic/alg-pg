@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
 #include <ctype.h>
 
 /**
@@ -12,10 +13,7 @@
  */
 using namespace std;
 
-// TODO: 見つけた時にすぐに挿入したい
-
-string space_replace(string arg, int string_length){
-    // string_lengthはspaceを除いた文字列の長さ
+string space_replace(string arg){
     int len = arg.length();
     vector<int> indexes(len);
     int space_index =  0;
@@ -36,7 +34,54 @@ string space_replace(string arg, int string_length){
     }
     return return_str;
 }
+
+string my_space_replace(string arg, int string_length){
+    // string_lengthはspaceを除いた文字列の長さ
+    int len = arg.length();
+    /** 空白の数 */
+    int space_count = len - string_length;
+    int index = string_length+space_count*3;
+    string ret = "";
+    if(string_length < arg.length()) arg += '\0';
+    for(int i = 0; i  < index; i++){
+        if(isspace(arg[i])){
+            ret += "%20";
+        }else{
+            ret += arg[i];
+        }
+    }
+    ret += '\0';
+    return ret;
+}
+
+
+string space_replace(string arg, int string_length){
+    // string_lengthはspaceを除いた文字列の長さ
+    int len = arg.length();
+    /** 空白の数 */
+    int space_count = len - string_length;
+    /** retのindex */
+    int index = string_length+space_count*3;
+    char *ret;
+    ret = (char *)calloc(index, sizeof(char));
+    if(string_length < arg.length()) arg += '\0';
+    for(int i = len-1; i >= 0; i--){
+        if(isspace(arg[i])){
+            ret[index-1] = *"0";
+            ret[index-2] = *"2";
+            ret[index-3] = *"%";
+            index -= 3;
+        }else{
+            ret[index-1] = arg[i];
+            index--;
+        }
+    }
+    return ret;
+}
+
+
 int main(){
+    cout << my_space_replace("hoge huga piyo", 12) << endl;
     cout << space_replace("hoge huga piyo", 12) << endl;
     return 0;
 }
