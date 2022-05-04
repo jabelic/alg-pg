@@ -19,7 +19,7 @@ string compress(string test_case){
     for(long i = 0; i < len; i++){
         // 先頭
         if(i==0){
-            val += test_case[i];
+            val += test_case[i]; // この結合はjavaで言うStringBuilderと同じ。Order(1).
             last_char =  test_case[i];
         // 前の文字が今の文字と違うとき
         }else if(test_case[i] != last_char){
@@ -54,5 +54,11 @@ int main(){
     cout << (compress(test_case)=="a4") << endl;
     test_case = "a";
     cout << (compress(test_case)=="a") << endl;
+    test_case = "aaaaaaaaaaaaaaaabbbbbbbbddddddddddkkkkkkkkeeeeeeee"
+                "jjjjjjjjdidifjllllllllllllwelkedfoisxdxxxxxxxxxxxxx"
+                "xxiiiiiiiiiiiittttttttttttpppppppAAAAAAADDDDDDDDDDDFFFFFFFFFFFFFFFFFFFFFFFDD"
+                "xxiiiiiiiiiiiittttttttttttpppppppAAAAAAADDDDDDDDDDDFFFFFFFFFFFFFFFFFFFFFFFDD"
+                "xxiiiiiiiiiiiittttttttttttpppppppAAAAAAADDDDDDDDDDDFFFFFFFFFFFFFFFFFFFFFFFDD";
+    cout << compress(test_case) << endl;
     return 0;
 }
